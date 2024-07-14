@@ -1,4 +1,4 @@
-from collections import defaultdict;
+from collections import defaultdict
 
 class Graph:
     def __init__(self):
@@ -26,4 +26,4 @@ if __name__ == '__main__':
     for i in range(N):
         s, d = map(int, input().split())
         G.addEdge(s, d)
-    G.DFS(int(input("Enter Source to Search (BFS) : ")))
+    G.DFS(int(input("Enter Source to Search (DFS) : ")))
