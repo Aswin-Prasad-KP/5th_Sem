@@ -1,5 +1,8 @@
 import heapq
 
+# (1, 2, 3)
+# (4, 5, 6) => (1, 2, 3, 4, 5, 6, 7, 8, 0)
+# (7, 8, 0)
 GOAL_STATE = (1, 2, 3, 4, 5, 6, 7, 8, 0)
 
 def manhattan_distance(state):
@@ -40,17 +43,23 @@ def best_first_search(start_state):
             while current:
                 path.append(current)
                 current = came_from[current]
-        return path[::-1]
-    for neighbor in get_neighbors(current):
-        if neighbor not in came_from:
-            came_from[neighbor] = current
-            heapq.heappush(open_list, (manhattan_distance(neighbor), neighbor))
+            return path[::-1]
+        for neighbor in get_neighbors(current):
+            if neighbor not in came_from:
+                came_from[neighbor] = current
+                heapq.heappush(open_list, (manhattan_distance(neighbor), neighbor))
     return None
 
-start_state = (1,2,3,5,6,0,7,8,4)
+# (1, 2, 3)
+# (5, 6, 0) => (1, 2, 3, 5, 6, 0, 7, 8, 4)
+# (7, 8, 4)
+
+start_state = tuple(map(int, input().split()))
 solution = best_first_search(start_state)
 if solution:
     for state in solution:
-        print(state)
+        for i in range(0, 9, 3):
+            print(state[i:i+3])
+        print()
 else:
     print("No solution found")
